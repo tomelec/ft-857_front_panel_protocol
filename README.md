@@ -6,7 +6,11 @@ Knowing the protocol enables us, for exmple, to
  * Establish a remote connection
  * Develop additional or replacement displays or control panels
  * Add features to the radio
+  * Band plan display
+  * Simultanous QRG and label display
  * Modify the menu structure
+  * Add custom menu items
+  * Pretty labels for the custom MFq function keys
  
 Also because I personally do not like undocumented protocols. And for the fun of it.
 
