@@ -9,3 +9,15 @@ Knowing the protocol enables us, for exmple, to
  * Modify the menu structure
  
 Also because I personally do not like undocumented protocols. And for the fun of it.
+
+## Docs
+See [doc/](doc/) for the work-in-progress protocol documentation.
+
+# Take care!
+Although the FT857´s front panel serial port hardware seems to be very well protected against over voltage and short circuit, take care not to damage your hardware. Playing around with the serial protocol, especially transmitting own data frames, may lead to unpredictable behavior of the tranceiver. It is even possible to key the transmitter that way. Also, changes of the calibration data or even a complete lockup might be possible. Make sure you have at least an EEPROM backup, including the soft calibration data.
+
+Note that the documentation ist far from being complete and probably contains errors.
+
+Use everything at your own risk. 
+
+And have a lot of fun!
