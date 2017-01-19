@@ -56,7 +56,7 @@ Here is still some work to do! Valid and special characters to be verified. Note
 ### 0x43 Display Meter
 Data: `[0x43] [Value]`
 
-Value for the on-screen meter, eg. S-meter.
+Value for the on-screen meter, eg. S-meter. Range: 0x00 - 0x64 (=100, full scale). 
 
 ### 0x45 Cursor
 Data: `[0x45] [Line] [Position]`
@@ -86,7 +86,7 @@ Examples:
 ### 0x4C Ext Meter
 Data: `[0x4C] [Value]`
 
-Output value for the external analog. Depends on the setting of menu 60 "MTR ARX SEL" and 61 "MTR ATX SEL".
+Output value for the external analog meter. Depends on the setting of menu 60 "MTR ARX SEL" and 61 "MTR ATX SEL". Range: 0x00 - 0xFF
 
 
 ### 0x4D Display Contrast
