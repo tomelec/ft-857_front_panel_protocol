@@ -68,14 +68,14 @@ Data: `[0x4A] [BL0] [BL1]`
 
 Controls the RGB LED backlight of the LC display. Probably 4 bit per color. FIXME: To be completed ...
 
-### 0x4B BUSY-LED Control
+### 0x4B LED Control
 Data: `[0x4B] [LED]`
 
-Controls the BUSY/TX/CW RGB LED and possibly other (LED) outputs. FIXME: To be completed...
+Controls the BUSY/TX/CW RGB LED and button backlight. FIXME: To be completed...
 
 Bit   |     7     |     6     |     5     |      4     |     3     |     2     |     1     |     0     
 ------|-----------|-----------|-----------|------------|-----------|-----------|-----------|----------
-LED   | Buttons?  |           |           |            |           |           | BUSY gn   | 
+LED   | Buttons   |           |           |            | /BUSY bl  |           | /BUSY gn  | /BUSY rd
 
 Examples:
 
