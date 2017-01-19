@@ -18,7 +18,7 @@ __Example: TRX initiates a data transfer:__
  3. TRX -> PAN: [data frame]
  4. TRX <- PAN: 0x06
  
-When idle, the TRX sends 0x90 every two seconds. PAN replies with 0x06.
+When idle, the TRX sends 0x90 every second. PAN replies with 0x06.
 
 ## Data frames
 After the initialisation (see above), the data frame is transmitted. It consists of a length byte, a command byte, one or more data bytes and the checksum.
