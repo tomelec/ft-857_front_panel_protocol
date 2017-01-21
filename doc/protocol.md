@@ -39,16 +39,19 @@ Data: `[0x41] [Line] [Position] [Chars ... ]`
 
 Manipulate the display text and symbols. The display is organized in lines of different text styles and column counts. _Line_ selects the display line (see below), _Position_ the character position within the line where the characters _Chars_ to be placed.
 
- * __Line 0x00__: Top line with symbols and volt meter
- * __Line 0x01__: VFOx/Mem, Mode
- * __Line 0x02__: Frequency; Special characters 0x12: IF shift dot, 0x16/0x17: clar arrow down/up, ...
- * __Line 0x03__: S/MFx area left of frequency line
- * __Line 0x04__: Menu Bar (button labels); 22 chars wide, special character 0x7D: lock symbol
+![Display Line Arrangement](images/display_lines.jpg)
+
+ * __Line 0x00__: 19 chars, Top line with symbols and volt meter
+ * __Line 0x01__: 20 chars, VFOx/Mem, Mode
+ * __Line 0x02__: 12 chars, Frequency <br>
+  Position 0 collides with line 0x03. Use 1 or higher.<br> 
+  Special characters 0x12: IF shift dot, 0x16/0x17: clar arrow down/up, ...
+ * __Line 0x03__: 3 chars, S/MFx area left of frequency line
+ * __Line 0x04__: 22 chars, Menu Bar (button labels) <br>
+	special character 0x7D: lock symbol
  
-Examples:
-
-`41 04 15 7D D7` -> sets the lock symbol
-
+Examples:<br>
+`41 04 15 7D D7` -> sets the lock symbol<br>
 `41 02 01 20 20 35 30 2E 32 34 37 2E 37 37 20 70` -> sets frequency display to "  50.247.77 "
 
 Here is still some work to do! Valid and special characters to be verified. Note that the menu structure works differently from the normal display control.
@@ -56,7 +59,7 @@ Here is still some work to do! Valid and special characters to be verified. Note
 ### 0x43 Display Meter
 Data: `[0x43] [Value]`
 
-Value for the on-screen meter, eg. S-meter. Range: 0x00 - 0x64 (=100, full scale). 
+Value for the on-screen meter, eg. S-meter. Range: 0x00 - 0x64 (=100, full scale). For some reason, the meter aperantly must first be written 0x00 before it accepts higher values correctly.
 
 ### 0x45 Cursor
 Data: `[0x45] [Line] [Position]`
@@ -66,22 +69,27 @@ Places a blinking cursor at the given line and position. Only used (usable) in l
 ### 0x4A Display Backlight Control
 Data: `[0x4A] [BL0] [BL1]`
 
-Controls the RGB LED backlight of the LC display. Probably 4 bit per color. FIXME: To be completed ...
+Controls the RGB LED backlight of the LC display. 4 bit per color:
+
+Bit   |     7     |     6     |     5     |      4     |     3     |     2     |     1     |     0     
+------|-----------|-----------|-----------|------------|-----------|-----------|-----------|----------
+BL0   | green MSB | green     | green     | green LSB  | blue MSB  | blue      | blue      | blue LSB
+BL1   | ?         | ?         | ?         | ?          | red MSB   | red       | red       | red LSB
 
 ### 0x4B LED Control
 Data: `[0x4B] [LED]`
 
-Controls the BUSY/TX/CW RGB LED and button backlight. FIXME: To be completed...
+Controls the BUSY/TX/CW RGB LED and button backlight.
 
 Bit   |     7     |     6     |     5     |      4     |     3     |     2     |     1     |     0     
 ------|-----------|-----------|-----------|------------|-----------|-----------|-----------|----------
-LED   | Buttons   |           |           |            | /BUSY bl  |           | /BUSY gn  | /BUSY rd
+LED   | Buttons   | 0         | 0         | 0          | /BUSY bl  | 0         | /BUSY gn  | /BUSY rd
 
-Examples:
+Note that the BUSY LED is active low while the button backlight is active high. Trying to set bit 4, 5 or 6 locks up the panel. Function unclear.
 
-`4B 89` -> green LED on
-
-`4B 8B` -> green LED off
+Examples:<br>
+`4B 89` -> buttons on, green LED on<br>
+`4B 8B` -> buttons on, green LED off,
 
 ### 0x4C Ext Meter
 Data: `[0x4C] [Value]`
