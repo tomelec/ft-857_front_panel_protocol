@@ -34,6 +34,68 @@ Example:
 `06 91 FF 8F 18 00 37`
 
 ## Commands TRX -> PAN
+### 0x40 Menu Control
+Data: `[0x40] [SubCommand]`
+
+The PAN has most of the menu data locally stored. The content is just selected by the TRX. Some texts and symbols are directly written to the display. All functions seems to be controlled by sub commands.
+#### Sub Commands
+* `00 00`: Clears the display
+* `06 00`: Writes _MENU MODE No_ to the top line
+* `07 nn`: With nn = menu number - 1<br>Writes the menu number to the top line and the menu name to the line below.
+* `08 00`: Unknown
+* `09 nn`: Setting: MAIN/SEL
+* `0A nn`: Setting: OFF/ON
+* `0B nn`: Setting: ENABLE/DISABLE
+* `0C nn`: Setting: 2.5KHz/5KHz/9KHz/10KHz/12.5KHz/25KHz
+* `0D nn`: Setting: OFF/1h/2h/3h/4h/5h/6h
+* `0E nn`: Setting: OFF/RANGE/ALL
+* `10 nn`: Setting: 440Hz/880Hz/1760Hz
+* `13 nn`: Setting: OFF/ON
+* `14 nn`: Setting: USB/LSB/AUTO
+* `15 nn`: Setting: NORMAL/REVERSE
+* `16 nn`: Setting: 400Hz/500Hz/600Hz/700Hz/800Hz
+* `17 nn`: Setting: 10ms/15ms/20ms/25ms/30ms
+* `19 nn`: Setting: N:/A:/AN:
+* `1A nn`: Setting: 1:3.0/1:3.1/1:3.2/1:3.3/.../1:4.5
+* `1B nn`: Setting: Tn-Rn/Tn-Riv/Tiv-Rn/Tiv-Riv
+* `1C nn`: Setting: FINE/COARSE
+* `1D nn`: Setting: RTTY-L/RTTY-U/PSK31-L/PSK31-U/USER-L/USER-U
+* `1E nn`: Setting: 1/2/3
+* `20 nn`: Setting: OFF/AUTO1/AUTO2/ON
+* `21 nn`: Setting: OFF/LPF/HPF/BOTH
+* `22 nn`: Setting: 60Hz/120Hz/240Hz
+* `23 nn`: Setting: 1000Hz/1160Hz/1320Hz/.../6000Hz
+* `24 nn`: Setting: 100Hz/160Hz/220Hz/.../940Hz/1000Hz
+* `25 nn`: Setting: 5KHz/6.25KHz/10KHz/12.5KHz/15KHz/20KHz/25KHz/50KHz
+* `26 nn`: Setting: DIAL/FREQ/PANEL/ALL
+* `27 nn`: Setting: PWR/ALC/MOD/SWR/VLT/N_A/OFF
+* `2A nn`: Setting: TIME/BUSY/STOP
+* `2C nn`: Setting: 4800bps/9600bps/38400bps
+* `2D nn`: Setting: 1KHz/2.5KHz/5KHz
+* `28 nn`: Setting: CAT/LINEAR/TUNER
+* `30 nn`: Setting: 100ms/200ms/.../3000ms
+* `31 nn`: Setting: OFF/XVTR A/XVTR B
+* `32 nn`: Setting: 1200bps/9600bps/
+* `33 nn`: Setting: RF-GAIN/SQL
+* `34 nn`: Setting: ELEKEY/MICKEY
+* `36 nn`: Setting: NOR/RMT/CAT
+* `37 01`: Unknown
+* `39 nn`: Setting: SIG/CTR/VLT/N_A/FS/OFF
+* `3A nn`: Setting: nn=00 ... 89, List for user keys
+* `3B nn`: Setting: CW SIDETONE/CW SPEED/MHZ_MEM GRP/MIC GAIN/NB LEVEL/RF POWER/STEP
+* `3C 01`: Unknown
+* `3E nn`: Setting: OFF/ATAS(HF)/ATAS(HF&50)/ATAS(ALL)/TUNER
+* `4C nn`: Setting: (DCS CODES)
+* `4D nn`: Setting: DCS T/R
+* `4E 00`: Display the S value in line 0x03.
+* `4F nn`: Setting: TONE T/R
+* `50 nn`: Setting: TONE Freq.
+
+
+
+
+
+
 ### 0x41 Display Control
 Data: `[0x41] [Line] [Position] [Chars ... ]`
 
@@ -65,6 +127,25 @@ Value for the on-screen meter, eg. S-meter. Range: 0x00 - 0x64 (=100, full scale
 Data: `[0x45] [Line] [Position]`
 
 Places a blinking cursor at the given line and position. Only used (usable) in line 2?
+
+### 0x47 Display Meter Stuff
+Data: `[0x47] [...]`
+
+This is a bit of a mystery.
+
+* `47 00 00`: Probably some initialisation for the on-screen meter
+* `47 00 40`: Unknown
+* `47 00 80`: used for band scope with max width
+* `47 00 88`: used for band scope with med width
+* `47 00 90`: used for band scope with min width
+* `47 03 00`: Peak-hold off
+* `47 03 40`: Peak-hold on
+
+### 0x48 Band Scope Data
+Data: `[0x48] [X] [Y]`
+
+Data for the on-screen band scope. _X_ range depends on the selected width, _y_ is 0x00 ... 0x64.
+Initialisation is a bis tricky, proper method to be investigated.
 
 ### 0x4A Display Backlight Control
 Data: `[0x4A] [BL0] [BL1]`
