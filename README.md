@@ -17,6 +17,23 @@ Also because I personally do not like undocumented protocols. And for the fun of
 ## Docs
 See [doc/](doc/) for the work-in-progress protocol documentation.
 
+## Tools
+A basic set of tools for playing around with the protocol.<br>
+These need __PySerial__ and __hexdump__ to work.
+
+###ft857.py
+ Simple module to control the FT-857's front panel and analyze the protocol. This is intended to play around with the protocol, not to build applications on top of it ;)
+
+ Can easily be used interactively in python, like:
+ ```python
+ import ft857
+ pan = ft857.frontPanel('/dev/ttyUSB0')
+ pan.setBacklight(0,15,0)
+ ```
+###sniffer.py
+ Simple tool for displaying raw serial data frames sent by the FT-857 TRX or front panel. Use a suitable USB<->5V serial adapter and connect it to GND and one of the data lines. See [hardware.md](doc/hardware.md) for details.
+
+
 # Take care!
 Although the FT857´s front panel serial port hardware seems to be very well protected against over voltage and short circuit, take care not to damage your hardware. Playing around with the serial protocol, especially transmitting own data frames, may lead to unpredictable behavior of the tranceiver. It is even possible to key the transmitter that way. Also, changes of the calibration data or even a complete lockup might be possible. Make sure you have at least an EEPROM backup, including the soft calibration data.
 
