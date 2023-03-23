@@ -183,6 +183,14 @@ Data: `[0x4D] [Contrast]`
 
 LC Display contrast 0x03 ... 0x0F 
 
+### 0x4E Unknown
+Data: `[0x4E] [?]`
+
+Transmitted five times by TRX during power up.
+
+![Capture 0x4E](images/capture_command_0x4e.png)
+
+
 
 ## Commands PAN -> TRX
 ### 0x91 Buttons
@@ -225,7 +233,25 @@ Data: `[0x97] [Volume]`
 
 Sent on change of the VOL knob setting. Volume range 0x00 ... 0xFF.
 
+### 0x98 Unknown
+Data: `[0x98] [?]`
+
+Transmitted once by PAN during power up.
+
+### 0x99 Unknown
+Data: `[0x99] [?]`
+
+Transmitted once by PAN during power up.
+
+![Capture 0x99](images/capture_command_0x99.png)
+
+### 0x9A Unknown
+Data: `[0x9A] [?] [?] [?] [?]`
+
+Transmitted once by PAN, after 0x99 during power up.
+
+
 
 # Sharing
 This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
-Thomas Kottek 2017
+Thomas Kottek 2023
